@@ -12,7 +12,7 @@
 
 <meta name="author" content="Tage N Singh" />
 
-<meta name="date" content="2021-04-12" />
+<meta name="date" content="2021-04-24" />
 
 <title>DATA-607 TIDYVERSE ASSIGNMENT</title>
 
@@ -131,14 +131,34 @@ a.sourceLine {
 <section class="page-header">
 <h1 class="title toc-ignore project-name">DATA-607 TIDYVERSE ASSIGNMENT</h1>
 <h4 class="author project-author">Tage N Singh</h4>
-<h4 class="date project-date">2021-04-12</h4>
+<h4 class="date project-date">2021-04-24</h4>
 </section>
 
 
 
 <section class="main-content">
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
-<pre><code>## -- Attaching packages --------------------------------------- tidyverse 1.3.0 --</code></pre>
+<div id="this-vignette-will-provide-a-brief-exploration-of-the-tidyverse-package-using-its-built-in-libraries" class="section level1">
+<h1>This vignette will provide a brief exploration of the “tidyverse” package using its built-in libraries</h1>
+<div id="the-tidyverse-is-a-powerful-collection-of-r-packages-that-are-actually-data-tools-all-packages-of-the-tidyverse-share-an-underlying-common-apis-as-listed-below." class="section level2">
+<h2>The tidyverse is a powerful collection of R packages that are actually data tools All packages of the tidyverse share an underlying common APIs as listed below.</h2>
+<p>Lists</p>
+<ul>
+<li>ggplot2, which implements the grammar of graphics. You can use it to visualize your data.</li>
+<li>dplyr is a grammar of data manipulation. You can use it to solve the most common data manipulation challenges.</li>
+<li>tidyr helps you to create tidy data or data where each variable is in a column, each observation is a row end each value is a cell.</li>
+<li>readr is a fast and friendly way to read rectangular data.</li>
+<li>purrr enhances R’s functional programming (FP) toolkit by providing a complete and consistent set of tools for working with functions and vectors.</li>
+<li>tibble is a modern re-imaginging of the data frame.</li>
+<li>stringr provides a cohesive set of functions designed to make working with strings as easy as posssible</li>
+<li>forcats provide a suite of useful tools that solve common problems with factors.</li>
+</ul>
+</div>
+<div id="now-for-the-package" class="section level2">
+<h2>Now for the package</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Loading just the &quot;tidyverse&quot; library !</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<pre><code>## -- Attaching packages --------------------------------------- tidyverse 1.3.1 --</code></pre>
 <pre><code>## v ggplot2 3.3.3     v purrr   0.3.4
 ## v tibble  3.1.0     v dplyr   1.0.5
 ## v tidyr   1.1.3     v stringr 1.4.0
@@ -146,6 +166,84 @@ a.sourceLine {
 <pre><code>## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
 ## x dplyr::filter() masks stats::filter()
 ## x dplyr::lag()    masks stats::lag()</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># For this exercise we are using a dataset from kaggle.com which contain </span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#information about avacado sales in various cities in the USA</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># ---------- Using the &quot;rear&quot; function &quot;read_csv&quot; -------</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>avacado <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">read_csv</span>(<span class="at">file =</span> <span class="st">&quot;https://raw.githubusercontent.com/tagensingh/SPS-DATA607-TIDYVERSE/main/avocado.csv&quot;</span>))</span></code></pre></div>
+<pre><code>## Warning: Missing column names filled in: &#39;X1&#39; [1]</code></pre>
+<pre><code>## 
+## -- Column specification --------------------------------------------------------
+## cols(
+##   X1 = col_double(),
+##   Date = col_date(format = &quot;&quot;),
+##   AveragePrice = col_double(),
+##   `Total Volume` = col_double(),
+##   `4046` = col_double(),
+##   `4225` = col_double(),
+##   `4770` = col_double(),
+##   `Total Bags` = col_double(),
+##   `Small Bags` = col_double(),
+##   `Large Bags` = col_double(),
+##   `XLarge Bags` = col_double(),
+##   type = col_character(),
+##   year = col_double(),
+##   region = col_character()
+## )</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ---------- Using the &quot;tibble&quot; function to look at a snapshot of the dataframe -------</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(avacado)</span></code></pre></div>
+<pre><code>## # A tibble: 18,249 x 14
+##       X1 Date       AveragePrice Total.Volume X4046   X4225 X4770 Total.Bags
+##    &lt;dbl&gt; &lt;date&gt;            &lt;dbl&gt;        &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;
+##  1     0 2015-12-27         1.33       64237. 1037.  54455.  48.2      8697.
+##  2     1 2015-12-20         1.35       54877.  674.  44639.  58.3      9506.
+##  3     2 2015-12-13         0.93      118220.  795. 109150. 130.       8145.
+##  4     3 2015-12-06         1.08       78992. 1132   71976.  72.6      5811.
+##  5     4 2015-11-29         1.28       51040.  941.  43838.  75.8      6184.
+##  6     5 2015-11-22         1.26       55980. 1184.  48068.  43.6      6684.
+##  7     6 2015-11-15         0.99       83454. 1369.  73673.  93.3      8319.
+##  8     7 2015-11-08         0.98      109428.  704. 101815.  80        6829.
+##  9     8 2015-11-01         1.02       99811. 1022.  87316.  85.3     11388.
+## 10     9 2015-10-25         1.07       74339.  842.  64757. 113        8626.
+## # ... with 18,239 more rows, and 6 more variables: Small.Bags &lt;dbl&gt;,
+## #   Large.Bags &lt;dbl&gt;, XLarge.Bags &lt;dbl&gt;, type &lt;chr&gt;, year &lt;dbl&gt;, region &lt;chr&gt;</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ---------- Using the &quot;arrange&quot; function  from &quot;dplyr&quot;to sort the dataframe by date-------</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>avacado_date <span class="ot">&lt;-</span> <span class="fu">arrange</span>(avacado,Date)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(avacado_date)</span></code></pre></div>
+<pre><code>## # A tibble: 18,249 x 14
+##       X1 Date       AveragePrice Total.Volume   X4046   X4225   X4770 Total.Bags
+##    &lt;dbl&gt; &lt;date&gt;            &lt;dbl&gt;        &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;      &lt;dbl&gt;
+##  1    51 2015-01-04         1.22       40873.  2.82e3  2.83e4  4.99e1      9716.
+##  2    51 2015-01-04         1         435021.  3.64e5  2.38e4  8.22e1     46816.
+##  3    51 2015-01-04         1.08      788025.  5.40e4  5.53e5  4.00e4    141137.
+##  4    51 2015-01-04         1.01       80034.  4.46e4  2.50e4  2.75e3      7756.
+##  5    51 2015-01-04         1.02      491738   7.19e3  3.97e5  1.29e2     87663.
+##  6    51 2015-01-04         1.4       116253.  3.27e3  5.57e4  1.10e2     57183.
+##  7    51 2015-01-04         0.93     5777335.  2.84e6  2.27e6  1.37e5    528452.
+##  8    51 2015-01-04         1.19      166006.  2.94e4  4.72e4  3.86e4     50798.
+##  9    51 2015-01-04         1.11      783068.  3.03e4  5.51e5  1.25e5     77539.
+## 10    51 2015-01-04         0.88      228570.  3.27e3  1.69e5  1.45e3     55083.
+## # ... with 18,239 more rows, and 6 more variables: Small.Bags &lt;dbl&gt;,
+## #   Large.Bags &lt;dbl&gt;, XLarge.Bags &lt;dbl&gt;, type &lt;chr&gt;, year &lt;dbl&gt;, region &lt;chr&gt;</code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ---------- Using the &quot;ggplot&quot; function  from &quot;ggplot2&quot;to chart the pricing density of avacados-------</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Histogram overlaid with kernel density curve</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(avacado, <span class="fu">aes</span>(<span class="at">x=</span>AveragePrice)) <span class="sc">+</span> </span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y=</span>..density..),      <span class="co"># Histogram with density instead of count on y-axis</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>                   <span class="at">binwidth=</span>.<span class="dv">1</span>,</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>                   <span class="at">colour=</span><span class="st">&quot;black&quot;</span>, <span class="at">fill=</span><span class="st">&quot;white&quot;</span>) <span class="sc">+</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_density</span>(<span class="at">alpha=</span>.<span class="dv">1</span>, <span class="at">fill=</span><span class="st">&quot;#FF6666&quot;</span>)<span class="sc">+</span><span class="co"># Overlay with transparent density plot</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggtitle</span>(<span class="st">&quot;Avacados Pricing Density&quot;</span>)</span></code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+</div>
+<div id="as-is-shown-above-the-tidyverse-packages-is-one-of-the-most-versatile-packages-in-the-r-sphere." class="section level2">
+<h2>As is shown above, the tidyverse packages is one of the most versatile packages in the R sphere….</h2>
+</div>
+</div>
 </section>
 
 

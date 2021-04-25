@@ -12,9 +12,67 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+This vignette will provide a brief exploration of the "tidyverse" package using its built-in libraries
+======================================================================================================
+
+The tidyverse is a powerful collection of R packages that are actually data tools  All packages of the tidyverse share an underlying  common APIs as listed below. 
+-------------------------------------------------------------------------------
+
+Lists
+
+- ggplot2, which implements the grammar of graphics. You can use it to visualize your data.
+- dplyr is a grammar of data manipulation. You can use it to solve the most common data manipulation challenges.
+- tidyr helps you to create tidy data or data where each variable is in a column, each observation is a row end each value is a cell.
+- readr is a fast and friendly way to read rectangular data.
+- purrr enhances R’s functional programming (FP) toolkit by providing a complete and consistent set of tools for working with functions and vectors.
+- tibble is a modern re-imaginging of the data frame.
+- stringr provides a cohesive set of functions designed to make working with strings as easy as posssible
+-  forcats provide a suite of useful tools that solve common problems with factors.
+
+Now for the package
+-------------------
+
 ```{r setup}
+#Loading just the "tidyverse" library !
 
 library(tidyverse)
 
 ```
 
+```{r tidyverse usage-1}
+
+# For this exercise we are using a dataset from kaggle.com which contain 
+#information about avacado sales in various cities in the USA
+
+# ---------- Using the "rear" function "read_csv" -------
+
+avacado <- data.frame(read_csv(file = "https://raw.githubusercontent.com/tagensingh/SPS-DATA607-TIDYVERSE/main/avocado.csv"))
+
+# ---------- Using the "tibble" function to look at a snapshot of the dataframe -------
+
+tibble(avacado)
+
+```
+
+```{r tidyverse usage-2}
+
+# ---------- Using the "arrange" function  from "dplyr"to sort the dataframe by date-------
+
+avacado_date <- arrange(avacado,Date)
+
+tibble(avacado_date)
+
+
+# ---------- Using the "ggplot" function  from "ggplot2"to chart the pricing density of avacados-------
+
+# Histogram overlaid with kernel density curve
+ggplot(avacado, aes(x=AveragePrice)) + 
+    geom_histogram(aes(y=..density..),      # Histogram with density instead of count on y-axis
+                   binwidth=.1,
+                   colour="black", fill="white") +
+    geom_density(alpha=.1, fill="#FF6666")+# Overlay with transparent density plot
+    ggtitle("Avacados Pricing Density")
+```
+
+As is shown above, the tidyverse packages is one of the most versatile packages in the R sphere....
+----------------------------------------------------------------------------------------------------
